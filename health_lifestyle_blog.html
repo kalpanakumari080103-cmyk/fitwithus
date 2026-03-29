@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitae — A Journal of Intentional Living</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,200;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF8F3;
+    --deep-forest: #1C2B1E;
+    --sage: #7A9B7C;
+    --sage-light: #A8C4A8;
+    --terracotta: #C4694A;
+    --amber: #D4A853;
+    --ink: #2A2520;
+    --muted: #8B8279;
+    --border: #D8D0C4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--deep-forest);
+    color: var(--cream);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(122,155,124,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 80% 70%, rgba(212,168,83,0.10) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .dots-bg {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(245,240,232,0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .header-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(4.5rem, 12vw, 9rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--warm-white);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .header-title span {
+    color: var(--sage);
+  }
+
+  .header-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.6);
+    text-align: center;
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+    max-width: 420px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+
+  .scroll-hint span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(122,155,124,0.8), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--deep-forest);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--deep-forest); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .wide-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── INTRO SECTION ── */
+  .intro {
+    padding: 5rem 0 4rem;
+    text-align: center;
+  }
+
+  .issue-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .intro h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-forest);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--sage);
+    margin: 2.5rem auto;
+  }
+
+  /* ── FEATURED ARTICLE ── */
+  .featured {
+    padding: 3rem 0;
+    background: var(--deep-forest);
+    color: var(--cream);
+  }
+
+  .featured-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .featured-visual {
+    position: relative;
+    height: 460px;
+  }
+
+  .featured-card {
+    position: absolute;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .card-main {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(160deg, #2D4A2F 0%, #1C3520 40%, #0F1E11 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    border: 1px solid rgba(122,155,124,0.2);
+  }
+
+  .card-accent {
+    width: 160px;
+    height: 160px;
+    background: var(--amber);
+    bottom: -20px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .featured-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .featured h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--warm-white);
+  }
+
+  .featured p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.65);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    flex-shrink: 0;
+  }
+
+  .meta-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(245,240,232,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--sage);
+    color: var(--sage-light);
+    transition: all 0.25s;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn:hover {
+    background: var(--sage);
+    color: var(--deep-forest);
+  }
+
+  /* ── MAIN ARTICLE BODY ── */
+  .article-body {
+    padding: 5rem 0;
+  }
+
+  .article-body h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-forest);
+    margin: 3rem 0 1.2rem;
+    line-height: 1.3;
+  }
+
+  .article-body h2:first-child { margin-top: 0; }
+
+  .article-body p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #3A3530;
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+
+  .pull-quote {
+    border-left: 3px solid var(--sage);
+    padding: 1.5rem 2rem;
+    margin: 3rem 0;
+    background: rgba(122,155,124,0.06);
+  }
+
+  .pull-quote p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--deep-forest);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .pull-quote cite {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1rem;
+    font-style: normal;
+  }
+
+  .tip-box {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--terracotta);
+    padding: 2rem;
+    margin: 2.5rem 0;
+    border-radius: 0 0 2px 2px;
+  }
+
+  .tip-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .tip-box ul {
+    padding-left: 1.2rem;
+  }
+
+  .tip-box li {
+    font-size: 1rem;
+    color: #3A3530;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+
+  /* ── PILLARS GRID ── */
+  .pillars {
+    padding: 5rem 0;
+    background: var(--warm-white);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-forest);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header p {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .pillar-card {
+    background: var(--warm-white);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .pillar-card:hover {
+    background: var(--deep-forest);
+    color: var(--cream);
+  }
+
+  .pillar-card:hover .pillar-title,
+  .pillar-card:hover .pillar-desc {
+    color: inherit;
+  }
+
+  .pillar-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .pillar-card:hover .pillar-number { color: var(--sage-light); }
+
+  .pillar-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+
+  .pillar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-forest);
+    margin-bottom: 0.75rem;
+    transition: color 0.3s;
+  }
+
+  .pillar-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+
+  /* ── HABITS TRACKER ── */
+  .habits {
+    padding: 5rem 0;
+  }
+
+  .habits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .habit-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.8rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--warm-white);
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .habit-item:hover {
+    border-color: var(--sage);
+    transform: translateY(-2px);
+  }
+
+  .habit-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--deep-forest);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .habit-content h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+
+  .habit-content p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .habit-tag {
+    margin-top: 0.7rem;
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: rgba(122,155,124,0.15);
+    color: var(--sage);
+    border-radius: 1px;
+  }
+
+  /* ── SEASONAL SECTION ── */
+  .seasonal {
+    padding: 5rem 0;
+    background: #EDE8DE;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .seasonal::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(196,105,74,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .seasonal-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .seasonal-text h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-forest);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .seasonal-text p {
+    font-size: 1rem;
+    color: #5A5048;
+    font-weight: 300;
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+
+  .seasonal-list {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  .seasonal-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(42,37,32,0.1);
+    font-size: 0.95rem;
+    color: #3A3530;
+    font-weight: 300;
+  }
+
+  .seasonal-list li::before {
+    content: '→';
+    color: var(--terracotta);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .seasonal-badge {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--deep-forest);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cream);
+    border: 1px solid rgba(122,155,124,0.3);
+    margin: 0 auto;
+  }
+
+  .seasonal-badge-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1rem;
+  }
+
+  .seasonal-badge-num {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--amber);
+  }
+
+  .seasonal-badge-sub {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.55);
+    font-weight: 300;
+    margin-top: 0.5rem;
+  }
+
+  /* ── CLOSING / NEWSLETTER ── */
+  .closing {
+    padding: 6rem 0;
+    text-align: center;
+    background: var(--deep-forest);
+    color: var(--cream);
+  }
+
+  .closing h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--warm-white);
+    margin-bottom: 1rem;
+  }
+
+  .closing p {
+    color: rgba(245,240,232,0.55);
+    font-size: 1rem;
+    max-width: 400px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 420px;
+    margin: 0 auto 3rem;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(122,155,124,0.3);
+    border-right: none;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(245,240,232,0.3); }
+
+  .newsletter-form button {
+    padding: 1rem 1.8rem;
+    background: var(--sage);
+    border: 1px solid var(--sage);
+    color: var(--deep-forest);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .newsletter-form button:hover { background: var(--sage-light); }
+
+  .closing-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(245,240,232,0.4);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111A12;
+    color: rgba(245,240,232,0.35);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .featured-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .featured-visual { height: 300px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .habits-grid { grid-template-columns: 1fr; }
+    .seasonal-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <div class="header-texture"></div>
+  <div class="dots-bg"></div>
+  <span class="header-tag">Est. March 2026 · Issue No. 01</span>
+  <h1 class="header-title">Vitae<span>.</span></h1>
+  <p class="header-sub">A quiet journal about living well — body, mind, and the spaces between.</p>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">Vitae</a>
+  <ul class="nav-links">
+    <li><a href="#">Nourish</a></li>
+    <li><a href="#">Move</a></li>
+    <li><a href="#">Rest</a></li>
+    <li><a href="#">Mind</a></li>
+    <li><a href="#">Journal</a></li>
+  </ul>
+</nav>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container">
+    <span class="issue-label">Spring Edition · 2026</span>
+    <h2>Wellness is not a destination.<br>It is a way of travelling.</h2>
+    <div class="divider"></div>
+    <p>Each issue, we explore the small, radical act of paying attention to how we live — and finding joy in the practice.</p>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="wide-container">
+    <div class="featured-inner">
+      <div class="featured-visual fade-in">
+        <div class="featured-card card-main">🌿</div>
+        <div class="featured-card card-accent">☀️</div>
+      </div>
+      <div class="featured-text fade-in">
+        <span class="featured-tag">Feature Essay</span>
+        <div class="article-meta">
+          <div class="meta-dot"></div>
+          <span class="meta-text">8 min read · Lifestyle</span>
+        </div>
+        <h3>The Art of Slowing Down in a World That Won't</h3>
+        <p>We have optimised nearly everything — sleep, diet, exercise, productivity. And yet many of us feel more depleted than ever. What if the missing piece isn't another protocol, but the permission to rest without guilt?</p>
+        <p>Modern wellness culture has a complicated relationship with stillness. We track our steps, log our macros, and schedule our meditation. But genuine health lives in the unscheduled moments too.</p>
+        <a class="btn" href="#">Read Essay →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN ARTICLE -->
+<section class="article-body">
+  <div class="container">
+    <div class="fade-in">
+      <span class="issue-label">Deep Dive</span>
+      <h2>Five Foundations of a Life Well-Lived</h2>
+
+      <p>There is a quiet revolution happening — not in gyms or supplement aisles, but in kitchens, morning routines, and evening walks. People are rediscovering that health is not a product to be purchased. It is a practice to be cultivated, slowly and with intention.</p>
+
+      <p>Research in longevity and lifestyle medicine increasingly points to the same conclusions: the populations that age with the most vitality share common threads. Not extraordinary supplements or biohacking gadgets, but deep sleep, whole food, daily movement, strong social bonds, and a sense of purpose. Simple. Profound. Entirely within reach.</p>
+
+      <div class="pull-quote">
+        <p>"Your body is not a machine to be optimised. It is a garden to be tended — with patience, presence, and a willingness to get your hands dirty."</p>
+        <cite>— Vitae, Spring 2026</cite>
+      </div>
+
+      <h2>Nourish: Eating as a Daily Act of Care</h2>
+
+      <p>The most enduring dietary wisdom is also the simplest: eat mostly plants, not too much, and cook as often as you can. Across blue zones — those remarkable pockets of the world where people live well into their nineties — there is no single miracle food, but there is a consistent love of vegetables, legumes, fermented foods, and meals shared with others.</p>
+
+      <p>Colour is your compass at the plate. A bowl of food that looks like a painter's palette — deep greens, purples, oranges, reds — is almost certainly feeding your gut microbiome the diversity it needs to thrive. The trillions of bacteria in your intestines are not passengers; they regulate immunity, mood, inflammation, and metabolism.</p>
+
+      <div class="tip-box">
+        <span class="tip-box-label">✦ Practical wisdom</span>
+        <ul>
+          <li>Aim for 30 different plant foods per week — herbs and spices count.</li>
+          <li>Eat your first meal within an hour of waking and finish dinner 2–3 hours before sleep.</li>
+          <li>Slow down: chew each mouthful fully, and pause halfway through a meal.</li>
+          <li>Make water your default drink. Herbal teas are your allies.</li>
+        </ul>
+      </div>
+
+      <h2>Move: The Body's Native Language</h2>
+
+      <p>Exercise science has delivered a somewhat uncomfortable finding: dedicated gym sessions cannot fully undo the harms of sitting for ten hours a day. The human body was shaped by near-constant, low-intensity movement interspersed with occasional bursts of effort. Our chairs are a relatively recent invention, and we are still adapting badly.</p>
+
+      <p>The goal, then, is not simply to exercise more — but to sit less and move differently throughout the day. A brisk ten-minute walk after each meal has been shown to blunt blood sugar spikes more effectively than a single longer session. Standing desks, stair preferences, walking meetings, evening stretches: these micro-movements accumulate into something quietly transformative.</p>
+
+      <h2>Rest: The Most Underrated Medicine</h2>
+
+      <p>Sleep has had a remarkable few years in the cultural conversation. We now understand it not as passive unconsciousness, but as a period of extraordinary biological activity: memory consolidation, emotional regulation, immune calibration, hormonal reset, and the brain's own waste-clearance system — the glymphatic network — flushing out the metabolic debris of the day.</p>
+
+      <p>Seven to nine hours is not laziness. It is maintenance. The research on sleep deprivation is sobering: even modest curtailment — sleeping six hours instead of eight — impairs cognition, raises cortisol, increases appetite for calorie-dense food, and suppresses immune function. Protecting sleep is arguably the single highest-leverage health behaviour available to most people.</p>
+
+      <div class="pull-quote">
+        <p>"Sleeping eight hours isn't indulgent. It's what every high-performing organ in your body is asking for every single night."</p>
+        <cite>— Sleep Research Society</cite>
+      </div>
+
+      <h2>Connection: The Social Architecture of Health</h2>
+
+      <p>Loneliness has been described by researchers as having a health impact equivalent to smoking 15 cigarettes a day. Strong social bonds, conversely, are among the most consistent predictors of longevity, resilience, and happiness found in the scientific literature. This is not merely correlation — the mechanisms involve immune function, inflammatory markers, and neuroendocrine pathways.</p>
+
+      <p>Community, ritual, belonging: these are not soft concerns. They are biological necessities. Protect your relationships. Invest in them as deliberately as you would your diet or your fitness. Show up for people, and let people show up for you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS GRID -->
+<section class="pillars">
+  <div class="wide-container">
+    <div class="section-header fade-in">
+      <span class="issue-label">The Framework</span>
+      <h2>Six Pillars of Intentional Health</h2>
+      <p>Hover to explore each dimension of a well-lived life.</p>
+    </div>
+    <div class="pillars-grid fade-in">
+      <div class="pillar-card">
+        <span class="pillar-number">01 / 06</span>
+        <span class="pillar-icon">🥦</span>
+        <div class="pillar-title">Nourishment</div>
+        <p class="pillar-desc">Whole foods, diverse plants, mindful eating. Fuel as an act of love for your future self.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">02 / 06</span>
+        <span class="pillar-icon">🏃</span>
+        <div class="pillar-title">Movement</div>
+        <p class="pillar-desc">Daily motion as a default. Strength, flexibility, cardiovascular ease — built gradually, kept joyfully.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">03 / 06</span>
+        <span class="pillar-icon">🌙</span>
+        <div class="pillar-title">Sleep</div>
+        <p class="pillar-desc">Consistent bedtimes, dark rooms, cool temperatures. The nightly reset every system depends on.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">04 / 06</span>
+        <span class="pillar-icon">🧘</span>
+        <div class="pillar-title">Mind</div>
+        <p class="pillar-desc">Stress managed, thoughts examined, presence practiced. Mental health is health — full stop.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">05 / 06</span>
+        <span class="pillar-icon">🤝</span>
+        <div class="pillar-title">Connection</div>
+        <p class="pillar-desc">Deep relationships, community rituals, acts of giving. The social medicine science keeps rediscovering.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">06 / 06</span>
+        <span class="pillar-icon">🌱</span>
+        <div class="pillar-title">Purpose</div>
+        <p class="pillar-desc">Knowing why you rise each morning. The quiet force that makes every other pillar sustainable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HABITS -->
+<section class="habits">
+  <div class="wide-container">
+    <div class="section-header fade-in">
+      <span class="issue-label">Daily Practice</span>
+      <h2>Small Habits, Long Arcs</h2>
+      <p>Eight things you can begin today — no equipment, no subscription required.</p>
+    </div>
+    <div class="habits-grid fade-in">
+      <div class="habit-item">
+        <div class="habit-icon">💧</div>
+        <div class="habit-content">
+          <h4>Morning Hydration</h4>
+          <p>Drink a large glass of water before anything else. Eight hours of breathing depletes more than you realise.</p>
+          <span class="habit-tag">Morning · 2 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">🚶</div>
+        <div class="habit-content">
+          <h4>Post-Meal Walks</h4>
+          <p>Ten minutes of gentle walking after eating significantly improves glucose metabolism and digestion.</p>
+          <span class="habit-tag">Daily · 10 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">📵</div>
+        <div class="habit-content">
+          <h4>Screen-Free Hour</h4>
+          <p>No screens for the first or last hour of your day. Protect your sleep architecture and morning clarity.</p>
+          <span class="habit-tag">Evening · 60 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">🌬️</div>
+        <div class="habit-content">
+          <h4>Breathwork Pause</h4>
+          <p>Three slow, deep breaths before any stressful task. Activates the parasympathetic nervous system instantly.</p>
+          <span class="habit-tag">Anytime · 1 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">📔</div>
+        <div class="habit-content">
+          <h4>Gratitude Note</h4>
+          <p>Write three things you are grateful for each morning. Rewires the brain toward positive attentional bias over time.</p>
+          <span class="habit-tag">Morning · 5 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">🌞</div>
+        <div class="habit-content">
+          <h4>Morning Light</h4>
+          <p>Get outside within 30 minutes of waking. Natural light anchors your circadian rhythm and lifts mood.</p>
+          <span class="habit-tag">Morning · 10 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">🧂</div>
+        <div class="habit-content">
+          <h4>Cook One Meal</h4>
+          <p>Prepare at least one meal from whole ingredients each day. You control what goes in when you cook.</p>
+          <span class="habit-tag">Daily · 20–40 min</span>
+        </div>
+      </div>
+      <div class="habit-item">
+        <div class="habit-icon">📞</div>
+        <div class="habit-content">
+          <h4>Reach Out</h4>
+          <p>Send a message or make a call to someone you care about. Social connection is a daily practice, not an event.</p>
+          <span class="habit-tag">Daily · 5 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEASONAL -->
+<section class="seasonal">
+  <div class="wide-container">
+    <div class="seasonal-grid">
+      <div class="seasonal-text fade-in">
+        <span class="issue-label">Seasonal Living</span>
+        <h2>Spring: A Season of Renewal</h2>
+        <p>Every culture that has lived close to the land has understood spring as a time of detoxification and re-emergence. The body, after months of heavier winter foods and reduced light, is ready for lighter fare, more activity, and a reset of habits that drifted in the dark months.</p>
+        <p>Traditional medicine systems — Ayurveda, Traditional Chinese Medicine, European herbalism — all share this seasonal wisdom. We are not separate from nature's rhythms; we are expressions of them.</p>
+        <ul class="seasonal-list">
+          <li>Increase leafy greens and bitter vegetables — dandelion, rocket, radicchio</li>
+          <li>Move your exercise outdoors as temperatures allow</li>
+          <li>Use the longer evenings for social connection and creativity</li>
+          <li>Declutter your physical space — a clean environment calms a busy mind</li>
+          <li>Reassess your sleep schedule as daylight shifts</li>
+        </ul>
+      </div>
+      <div class="fade-in" style="display:flex;align-items:center;justify-content:center;">
+        <div class="seasonal-badge">
+          <span class="seasonal-badge-label">Days of Spring</span>
+          <span class="seasonal-badge-num">92</span>
+          <span class="seasonal-badge-sub">March 20 — June 21</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <span class="issue-label" style="color:var(--sage-light)">Stay Connected</span>
+    <h2>Letters from the garden,<br>twice a month.</h2>
+    <p>Seasonal essays, practical wisdom, and the occasional recipe — delivered quietly to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com">
+      <button type="button">Subscribe</button>
+    </div>
+    <p class="closing-quote">"The greatest wealth is health. The greatest gift is time. The greatest art is living well."</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Vitae Journal · A publication about intentional living · Written with care · Read with discernment</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
